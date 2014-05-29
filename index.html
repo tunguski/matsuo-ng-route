@@ -163,7 +163,11 @@
     </div>
   </footer>
 
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="bower_components/highlightjs/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    $('code').each(function(i, e) {hljs.highlightBlock(e)});
+  </script>
 </body>
 </html>
