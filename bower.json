@@ -1,10 +1,10 @@
 {
-	"name": "matsuo-ng-module",
+	"name": "matsuo-ng-route",
 	"version": "1.0.0",
 	"authors": [
 		"Marek Romanowski <marek.romanowski@gmail.com>"
 	],
-	"description": "Matsuo IT test module",
+	"description": "Simple AngularJs Routing",
 	"keywords": [
 		"angular",
 		"AngularJS",

@@ -1,4 +1,4 @@
-matsuo-ng-module
+matsuo-ng-route
 ================
 
-Test grunt module
+Simple AngularJs Routes
