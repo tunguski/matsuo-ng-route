@@ -16,7 +16,10 @@
 		"node_modules",
 		"bower_components",
 		"test",
-		"tests"
+		"tests",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
 	],
 	"dependencies": {
 		"angular":">=1.2.0",
