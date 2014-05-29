@@ -1,9 +1,9 @@
 {
-	"author": "",
+	"author": "Marek Romanowski",
 	"name": "matsuo-ng-module-demo",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "",
-	"homepage": "",
+	"homepage": "https://tunguski.github.com/matsuo-ng-module",
 	"dependencies": {
 	},
 	"devDependencies": {

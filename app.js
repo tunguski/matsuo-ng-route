@@ -9,7 +9,7 @@ angular.module('myApp', [
 'ngRoute', 'ngSanitize', 'ngTouch', 'ngAnimate',		//additional angular modules
 'tunguski.matsuo-ng-module'
 ]).
-config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider, $compileProvider) {
+config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	/**
 	setup - whitelist, appPath, html5Mode
 	@toc 1.
