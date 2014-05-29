@@ -22,7 +22,7 @@ TODO
 
 'use strict';
 
-angular.module('tunguski.matsuo-ng-module', []).directive('mtNgModule', [ function () {
+angular.module('tunguski.matsuo-ng-route', []).directive('mtRoute', [ function () {
 
 	return {
 		restrict: 'A',

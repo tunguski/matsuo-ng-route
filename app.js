@@ -7,7 +7,7 @@
 
 angular.module('myApp', [
 'ngRoute', 'ngSanitize', 'ngTouch', 'ngAnimate',		//additional angular modules
-'tunguski.matsuo-ng-module'
+'tunguski.matsuo-ng-route'
 ]).
 config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	/**
@@ -18,9 +18,9 @@ config(['$routeProvider', '$locationProvider', function($routeProvider, $locatio
 	
 	// var staticPath ='/';
 	var staticPath;
-	// staticPath ='/angular-directives/matsuo-ng-module/';		//local
+	// staticPath ='/angular-directives/matsuo-ng-route/';		//local
 	staticPath ='';		//nodejs (local)
-	// staticPath ='/matsuo-ng-module/';		//gh-pages
+	// staticPath ='/matsuo-ng-route/';		//gh-pages
 	var appPathRoute ='/';
 	var pagesPath =staticPath+'pages/';
 	
