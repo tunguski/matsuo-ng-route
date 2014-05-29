@@ -13,6 +13,6 @@
     "commit": "05ca5aac42c4160ce7135d6105036d682ae18a96"
   },
   "_source": "git://github.com/angular/bower-angular-animate.git",
-  "_target": ">1.2.0",
+  "_target": ">=1.2.0",
   "_originalSource": "angular-animate"
 }

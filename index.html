@@ -1,15 +1,166 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
 
-    <title>matsuo-ng-module</title>
+  <title>matsuo-ng-module</title>
 
-	<link rel="stylesheet" href="main.css"/>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="main.css" />
 
 </head>
 <body>
+
+  <header>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Simple AngularJs Routing</h1>
+        <p>Define once, route always</p>
+        <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="feature-section">
+    <div class="container">
+      <h2>Simple generic routing</h2>
+      <p>
+        Module provides generic routing configuration. It works in applications that most of the time use one controller
+        for one page. In that situation it is normal to specify controller in html.
+      </p>
+      <h3>Example</h3>
+      <p>
+        With configuration
+        <pre>angular.module('myApp', ['mtRoute'])
+  .factory('routeConfiguration', function() {
+    return {
+      rootPath: 'views',
+      extension: '.html'
+    }
+  });</pre>
+        and link
+        <pre>&lt;a href="/#/organization/person/{{user.person.id}}"&gt;</pre>
+        after clicking there will be server request for view
+        <pre>/views/organization/person.html</pre>
+        Assuming that person.html contains
+        <pre>ng-controller="PersonController"</pre>
+        it may use person's id
+        <pre>var idPerson = $routeParams.idEntity;</pre>
+      </p>
+    </div>
+  </div>
+
+
+  <div class="feature-section">
+    <div class="container">
+      <h2>Views configuration</h2>
+      <p>
+        You may define your views by providing <code>routeConfiguration</code> service.
+      </p>
+      <table class="table">
+        <tr>
+          <td><code>routeConfiguration.rootPath</code></td>
+          <td>Defines base url for view definition lookup</td>
+        </tr>
+        <tr>
+          <td><code>routeConfiguration.extension</code></td>
+          <td>Defines view url extension. It will be concatenated to every view url searched.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="feature-section">
+    <div class="container">
+      <h2>How routing works</h2>
+      <p>
+        There are 4 default routing strategies matched in order as described below. Each basic view has to be placed in
+        directory. It cannot be subdirectory, or base directory. It enforces splitting views in directories. Standard
+        link looks like this: <code>&lt;a href="/#/organization/person/{{user.person.id}}"&gt;</code>. Here we have
+        <code>organization</code> directory in which <code>person</code> view file will be looked up.
+        <code>$routeParams.idEntity</code> parameter will contain value of <code>{{user.person.id}}</code>.
+      </p>
+
+      <h3>Route matches parameters</h3>
+      <table class="table">
+        <tr>
+          <td><code>:dir</code></td>
+          <td>Directory in views <code>rootPath</code> in which view is placed</td>
+        </tr>
+        <tr>
+          <td><code>:idView</code></td>
+          <td>Name of the view. It will be concatenated with <code>extension</code> before sending request</td>
+        </tr>
+        <tr>
+          <td><code>:idEntity</code></td>
+          <td>Value that will be accessible to controller by <code>$routeParams.idEntity</code></td>
+        </tr>
+        <tr>
+          <td><code>:parent</code></td>
+          <td>Parent entity name.</td>
+        </tr>
+        <tr>
+          <td><code>:idParentEntity</code></td>
+          <td>Value that will be accessible to controller by <code>$routeParams.idParentEntity</code></td>
+        </tr>
+      </table>
+
+      <h3>Route matches</h3>
+      <ol>
+        <li><code>/:dir/:parent/:idParentEntity/:idView/:idEntity</code></li>
+        <li><code>/:dir/:parent/:idParentEntity/:idView</code></li>
+        <li><code>/:dir/:idView/:idEntity</code></li>
+        <li><code>/:dir/:idView</code></li>
+      </ol>
+    </div>
+  </div>
+
+
+  <div class="feature-section">
+    <div class="container">
+      <h2>Automatic errors handling</h2>
+      <p>
+        Module provides interceptor for handling error status codes:
+        <table class="table">
+          <tr>
+            <td>401</td>
+            <td>unauthorized</td>
+            <td><code>$rootScope.loggedIn</code> property is set to <code>false</code> when unauthorized status is
+              returned</td>
+          </tr>
+          <tr>
+            <td>403</td>
+            <td>forbidden</td>
+            <td>is logged if possible</td>
+          </tr>
+          <tr>
+            <td>500</td>
+            <td>internal server error</td>
+            <td>shows information in toastr panel</td>
+          </tr>
+        </table>
+      </p>
+    </div>
+  </div>
+
+  <div class="feature-section">
+    <div class="container">
+      <h2>License</h2>
+      This project is licensed under terms of <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 License</a>
+    </div>
+  </div>
+
+    <!--
 	<div ng-view></div>
+  -->
+
+  <footer>
+    <div class="container">
+      <h5>Matsuo IT 2014</h5>
+    </div>
+  </footer>
 
 	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
 	<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
