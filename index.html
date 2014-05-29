@@ -6,6 +6,7 @@
   <title>matsuo-ng-route</title>
 
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css" />
 	<link rel="stylesheet" href="main.css" />
 
 </head>
@@ -32,21 +33,21 @@
       <h3>Example</h3>
       <p>
         With configuration
-        <pre>angular.module('myApp', ['mtRoute'])
+        <pre><code>angular.module('myApp', ['mtRoute'])
   .factory('routeConfiguration', function() {
     return {
       rootPath: 'views',
       extension: '.html'
     }
-  });</pre>
+  });</code></pre>
         and link
-        <pre>&lt;a href="/#/organization/person/{{user.person.id}}"&gt;</pre>
+        <pre><code>&lt;a href="/#/organization/person/{{user.person.id}}"&gt;</code></pre>
         after clicking there will be server request for view
-        <pre>/views/organization/person.html</pre>
+        <pre><code>/views/organization/person.html</code></pre>
         Assuming that person.html contains
-        <pre>ng-controller="PersonController"</pre>
+        <pre><code>ng-controller="PersonController"</code></pre>
         it may use person's id
-        <pre>var idPerson = $routeParams.idEntity;</pre>
+        <pre><code>var idPerson = $routeParams.idEntity;</code></pre>
       </p>
     </div>
   </div>
@@ -163,11 +164,9 @@
   </footer>
 
 	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-route/angular-route.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-touch/angular-touch.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
-	
+  <script type="text/javascript" src="bower_components/highlightjs/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
 	<script type="text/javascript" src="ng-module.js"></script>
 	<!--<script type="text/javascript" src="ng-module.min.js"></script>-->
 	
