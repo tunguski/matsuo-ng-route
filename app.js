@@ -19,7 +19,7 @@ config(['$routeProvider', '$locationProvider', '$compileProvider', function($rou
 	// var staticPath ='/';
 	var staticPath;
 	// staticPath ='/angular-directives/matsuo-ng-module/';		//local
-	staticPath ='/';		//nodejs (local)
+	staticPath ='';		//nodejs (local)
 	// staticPath ='/matsuo-ng-module/';		//gh-pages
 	var appPathRoute ='/';
 	var pagesPath =staticPath+'pages/';
