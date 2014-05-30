@@ -15,6 +15,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  grunt.loadNpmTasks('grunt-karma');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -368,7 +370,7 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       unit: {
-        configFile: 'karma.conf.js',
+        configFile: 'test/karma.conf.js',
         singleRun: true
       }
     }

@@ -1,30 +1,31 @@
 {
-	"name": "matsuo-ng-route",
-	"version": "0.0.1",
-	"authors": [
-		"Marek Romanowski <marek.romanowski@gmail.com>"
-	],
-	"description": "Simple AngularJs Routing",
-	"keywords": [
-		"angular",
-		"AngularJS",
-		"module"
-	],
-	"license": "MIT",
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"test",
-		"tests",
+  "name": "matsuo-ng-route",
+  "version": "0.0.1",
+  "authors": [
+    "Marek Romanowski <marek.romanowski@gmail.com>"
+  ],
+  "description": "Simple AngularJs Routing",
+  "keywords": [
+    "angular",
+    "AngularJS",
+    "module"
+  ],
+  "license": "Apache 2.0 License",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
-	],
-	"dependencies": {
-		"angular":">=1.2.0",
-		"angular-route":">=1.2.0"
-	},
-	"devDependencies": {
-	}
+  ],
+  "dependencies": {
+    "angular": ">=1.2.0",
+    "angular-route": ">=1.2.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.16"
+  }
 }
