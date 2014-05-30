@@ -1,6 +1,6 @@
 {
   "name": "matsuo-ng-route",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "authors": [
     "Marek Romanowski <marek.romanowski@gmail.com>"
   ],
@@ -26,6 +26,6 @@
     "angular-route": ">=1.2.0"
   },
   "devDependencies": {
-    "angular-mocks": "~1.2.16"
+    "angular-mocks": ">=1.2.0"
   }
 }
