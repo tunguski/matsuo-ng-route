@@ -2,11 +2,11 @@
  * Created by marek on 03.03.14.
  */
 angular.module('mt.route', [ 'ngRoute'])
-    .config(function($routeProvider, $httpProvider, $sceProvider, routeConfiguration) {
+    .config(function($routeProvider, $httpProvider, routeConfiguration) {
 
       var routeDefinition = {
         templateUrl : function (routePathParams) {
-          return '/' + routeConfiguration.rootPath + '/' + routePathParams.dir + '/'
+          return (routeConfiguration.file ? '.' : '') + '/' + routeConfiguration.rootPath + '/' + routePathParams.dir + '/'
               + (routePathParams.parent ? routePathParams.parent + '/' : '')
               + routePathParams.idView + routeConfiguration.extension;
         }
