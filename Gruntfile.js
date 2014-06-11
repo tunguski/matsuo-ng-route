@@ -15,8 +15,6 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  grunt.loadNpmTasks('grunt-karma');
-
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -373,6 +371,16 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    coveralls: {
+      options: {
+        debug: true,
+        coverage_dir: 'coverage/',
+        dryRun: false,
+        force: true,
+        recursive: true
+      }
     }
   });
 
@@ -423,7 +431,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
+    //'newer:jshint',
     'test',
     'build'
   ]);
