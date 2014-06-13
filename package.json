@@ -1,6 +1,10 @@
 {
   "name": "matsuo-ng-route",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:tunguski/matsuo-ng-route.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "coveralls": "^2.10.0",
