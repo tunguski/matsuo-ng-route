@@ -27,15 +27,15 @@ angular.module('mt.route', [ 'ngRoute'])
 
     /**
      * Helper interceptor for selenium. It adds application prefix for absolute requests that are not for templates if
-     * application prefix is declared. Interceptor looks up for prefix on window.base_app_location.
+     * application prefix is declared. Interceptor looks up for prefix on mtRouteConfig.base_app_location.
      */
-    .factory('contextPathInterceptor', function() {
+    .factory('contextPathInterceptor', function(mtRouteConfig) {
       return {
         'request': function(config) {
-          if (window.base_app_location &&
+          if (mtRouteConfig.base_app_location &&
               config.url.indexOf('/') == 0 &&
-              !config.url.contains("template")) {
-            config.url = (window.base_app_location + config.url).replace(/\/\//g, '/');
+              !_.strContains(config.url, "template")) {
+            config.url = (mtRouteConfig.base_app_location + config.url).replace(/\/\//g, '/');
             return config;
           }
 
@@ -67,6 +67,10 @@ angular.module('mt.route', [ 'ngRoute'])
           return $q.reject(rejection);
         }
       }
+    })
+
+    .constant('mtRouteConfig', {
+      base_app_location: ''
     })
 ;
 

@@ -35,9 +35,10 @@ describe("Matsuo Routing -", function () {
   });
 
   describe("contextPathInterceptor", function() {
-    var contextPathInterceptor;
-    beforeEach(inject(function (_contextPathInterceptor_) {
+    var contextPathInterceptor, mtRouteConfig;
+    beforeEach(inject(function (_contextPathInterceptor_, _mtRouteConfig_) {
       contextPathInterceptor = _contextPathInterceptor_;
+      mtRouteConfig = _mtRouteConfig_;
     }));
 
     it("work with absolute path", function () {
@@ -47,11 +48,10 @@ describe("Matsuo Routing -", function () {
     });
 
     it("append base_app_location when needed", function () {
-      window.base_app_location = 'xxx';
-      var config = { url: 'api/7' };
+      mtRouteConfig.base_app_location = 'test';
+      var config = { url: '/api/7' };
       contextPathInterceptor.request(config);
-      // fixme!
-      expect(config.url).toBe('xxx/api/7');
+      expect(config.url).toBe('test/api/7');
     });
   });
 
