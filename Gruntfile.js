@@ -381,6 +381,12 @@ module.exports = function (grunt) {
         force: true,
         recursive: true
       }
+    },
+
+    release: {
+      options: {
+        npm: false
+      }
     }
   });
 
