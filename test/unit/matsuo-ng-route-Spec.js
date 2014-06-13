@@ -1,6 +1,10 @@
 /// <reference path="counter.js">
 "use strict";
 
+var log = function() {}
+var toastr = {
+  error: function () {}
+}
 
 angular.module('mt.route')
     .constant('routeConfiguration', {
@@ -38,14 +42,15 @@ describe("Matsuo Routing -", function () {
 
     it("work with absolute path", function () {
       var config = { url: '/api/7' };
-      contextPathInterceptor(config);
+      contextPathInterceptor.request(config);
       expect(config.url).toBe('/api/7');
     });
 
     it("append base_app_location when needed", function () {
-      window.base_app_location = 'xxx'
+      window.base_app_location = 'xxx';
       var config = { url: 'api/7' };
-      contextPathInterceptor(config);
+      contextPathInterceptor.request(config);
+      // fixme!
       expect(config.url).toBe('xxx/api/7');
     });
   });
@@ -58,7 +63,7 @@ describe("Matsuo Routing -", function () {
 
     it("work", function () {
       unauthorizedInterceptor.responseError({ status: 401, data: 'data' });
-      expect($rootScope.loggedIn).toBe(false);
+      expect(rootScope.loggedIn).toBe(false);
 
       unauthorizedInterceptor.responseError({ status: 403, data: 'data' });
       // no possible test actually
