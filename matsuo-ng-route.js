@@ -2,12 +2,17 @@
  * Created by marek on 03.03.14.
  */
 angular.module('mt.route', [ 'ngRoute'])
+    .constant('mtRouteConfig', {
+      base_app_location: ''
+    })
+
     .config(function($routeProvider, $httpProvider, routeConfiguration) {
 
       var routeDefinition = {
         templateUrl : function (routePathParams) {
-          return (routeConfiguration.file ? '.' : '') + '/' + routeConfiguration.rootPath + '/' + routePathParams.dir + '/'
+          return (routeConfiguration.file ? '.' : '') + '/' + routeConfiguration.rootPath + '/'
               + (routePathParams.parent ? routePathParams.parent + '/' : '')
+              + routePathParams.dir + '/'
               + routePathParams.idView + routeConfiguration.extension;
         }
       };
@@ -67,10 +72,6 @@ angular.module('mt.route', [ 'ngRoute'])
           return $q.reject(rejection);
         }
       }
-    })
-
-    .constant('mtRouteConfig', {
-      base_app_location: ''
     })
 ;
 
