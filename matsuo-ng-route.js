@@ -3,17 +3,21 @@
  */
 angular.module('mt.route', [ 'ngRoute'])
     .constant('mtRouteConfig', {
-      base_app_location: ''
+      base_app_location: '',
+      file: false,
+      rootPath: 'views',
+      extension: '.html',
+      defaultRoute: ''
     })
 
-    .config(function($routeProvider, $httpProvider, routeConfiguration) {
+    .config(function($routeProvider, $httpProvider, mtRouteConfig) {
 
       var routeDefinition = {
         templateUrl : function (routePathParams) {
-          return (routeConfiguration.file ? '.' : '') + '/' + routeConfiguration.rootPath + '/'
+          return (mtRouteConfig.file ? '.' : '') + '/' + mtRouteConfig.rootPath + '/'
               + (routePathParams.parent ? routePathParams.parent + '/' : '')
               + routePathParams.dir + '/'
-              + routePathParams.idView + routeConfiguration.extension;
+              + routePathParams.idView + mtRouteConfig.extension;
         }
       };
 

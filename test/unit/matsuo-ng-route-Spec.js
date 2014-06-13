@@ -6,13 +6,13 @@ var toastr = {
   error: function () {}
 }
 
-var routeConfiguration = {
-  rootPath: 'views',
-  extension: '.xtest'
-};
+var routeConfiguration;
 
 angular.module('mt.route')
-    .constant('routeConfiguration', routeConfiguration);
+    .config(function(mtRouteConfig) {
+      mtRouteConfig.extension = '.xtest';
+      routeConfiguration = mtRouteConfig;
+    });
 beforeEach(module('mt.route'));
 
 var rootScope, scope, http, compile, route;
@@ -52,7 +52,7 @@ describe("Matsuo Routing -", function () {
     expect(templateUrl(params)).toBe('/views/uber/lemur/access.xtest');
     routeConfiguration.file = true;
     expect(templateUrl(params)).toBe('./views/uber/lemur/access.xtest');
-    routeConfiguration.file = undefined;
+    routeConfiguration.file = false;
   });
 
   it("is defined uniformly", function () {
