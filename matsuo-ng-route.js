@@ -42,7 +42,8 @@ angular.module('mt.route', [ 'ngRoute'])
       return {
         'request': function(config) {
           var subClass = _.find(config.url.split('/'), function (elem) { return !!elem; });
-          if (mtRouteConfig.apiRedirects[subClass]) {
+          if (config.url.indexOf('/') === 0 &&
+              mtRouteConfig.apiRedirects[subClass]) {
             config.url = (mtRouteConfig.apiRedirects[subClass] + config.url);
           }
 
@@ -59,8 +60,8 @@ angular.module('mt.route', [ 'ngRoute'])
     .factory('contextPathInterceptor', function(mtRouteConfig) {
       return {
         'request': function(config) {
-          if (mtRouteConfig.base_app_location &&
-              config.url.indexOf('/') == 0 &&
+          if (config.url.indexOf('/') === 0 &&
+              mtRouteConfig.base_app_location &&
               !_.strContains(config.url, "template")) {
             config.url = (mtRouteConfig.base_app_location + config.url).replace(/\/\//g, '/');
           }
