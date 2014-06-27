@@ -3,6 +3,7 @@
  */
 angular.module('mt.route', [ 'ngRoute'])
     .constant('mtRouteConfig', {
+      apiRedirects: {},
       base_app_location: '',
       file: false,
       rootPath: 'views',
@@ -30,7 +31,24 @@ angular.module('mt.route', [ 'ngRoute'])
         $routeProvider.when(path, routeDefinition);
       });
 
-      $httpProvider.interceptors.push('contextPathInterceptor', 'unauthorizedInterceptor');
+      $httpProvider.interceptors.push('contextPathInterceptor', 'unauthorizedInterceptor', 'apiRedirectsInterceptor');
+    })
+
+
+    /**
+     * Interceptor that changes hosts that receive requests for special api.
+     */
+    .factory('apiRedirectsInterceptor', function(mtRouteConfig) {
+      return {
+        'request': function(config) {
+          var subClass = _.find(config.url.split('/'), function (elem) { return !!elem; });
+          if (mtRouteConfig.apiRedirects[subClass]) {
+            config.url = (mtRouteConfig.apiRedirects[subClass] + config.url);
+          }
+
+          return config;
+        }
+      }
     })
 
 
@@ -45,7 +63,6 @@ angular.module('mt.route', [ 'ngRoute'])
               config.url.indexOf('/') == 0 &&
               !_.strContains(config.url, "template")) {
             config.url = (mtRouteConfig.base_app_location + config.url).replace(/\/\//g, '/');
-            return config;
           }
 
           return config;

@@ -1,5 +1,5 @@
-/// <reference path="counter.js">
-"use strict";
+/// <reference path='counter.js'>
+'use strict';
 
 var log = function() {}
 var toastr = {
@@ -15,32 +15,28 @@ angular.module('mt.route')
     });
 beforeEach(module('mt.route'));
 
-var rootScope, scope, http, compile, route;
+var rootScope, scope, http, compile, route, mtRouteConfig;
 
-beforeEach(inject(function ($httpBackend, $rootScope, $compile, $route) {
+beforeEach(inject(function ($httpBackend, $rootScope, $compile, $route, _mtRouteConfig_) {
   http = $httpBackend;
   rootScope = $rootScope;
   scope = $rootScope.$new();
   compile = $compile;
   route = $route;
+  mtRouteConfig = _mtRouteConfig_;
 }));
 
 
-describe("Matsuo Routing -", function () {
-  var contextPathInterceptor, mtRouteConfig;
-  beforeEach(inject(function (_contextPathInterceptor_, _mtRouteConfig_) {
-    contextPathInterceptor = _contextPathInterceptor_;
-    mtRouteConfig = _mtRouteConfig_;
-  }));
+describe('Matsuo Routing -', function () {
 
-  it("It contains correct routing definitions", function () {
+  it('It contains correct routing definitions', function () {
     expect(route.routes['/:dir/:parent/:idParentEntity/:idView/:idEntity']).not.toBeNull();
     expect(route.routes['/:dir/:parent/:idParentEntity/:idView']).not.toBeNull();
     expect(route.routes['/:dir/:idView/:idEntity']).not.toBeNull();
     expect(route.routes['/:dir/:idView']).not.toBeNull();
   });
 
-  it("returns correct view address", function () {
+  it('returns correct view address', function () {
     var templateUrl = route.routes['/:dir/:idView'].templateUrl;
 
     var params = {
@@ -55,7 +51,7 @@ describe("Matsuo Routing -", function () {
     routeConfiguration.file = false;
   });
 
-  it("is defined uniformly", function () {
+  it('is defined uniformly', function () {
     var templateUrl = route.routes['/:dir/:idView'].templateUrl;
 
     expect(route.routes['/:dir/:parent/:idParentEntity/:idView/:idEntity'].templateUrl).toBe(templateUrl);
@@ -64,14 +60,20 @@ describe("Matsuo Routing -", function () {
     expect(route.routes['/:dir/:idView'].templateUrl).toBe(templateUrl);
   });
 
-  describe("contextPathInterceptor", function() {
-    it("work with absolute path", function () {
+  describe('contextPathInterceptor', function() {
+
+    var contextPathInterceptor;
+    beforeEach(inject(function (_contextPathInterceptor_) {
+      contextPathInterceptor = _contextPathInterceptor_;
+    }));
+
+    it('work with absolute path', function () {
       var config = { url: '/api/7' };
       contextPathInterceptor.request(config);
       expect(config.url).toBe('/api/7');
     });
 
-    it("append base_app_location when needed", function () {
+    it('append base_app_location when needed', function () {
       mtRouteConfig.base_app_location = 'test';
       var config = { url: '/api/7' };
       contextPathInterceptor.request(config);
@@ -79,13 +81,14 @@ describe("Matsuo Routing -", function () {
     });
   });
 
-  describe("unauthorizedInterceptor", function() {
+  describe('unauthorizedInterceptor', function() {
+
     var unauthorizedInterceptor;
     beforeEach(inject(function (_unauthorizedInterceptor_) {
       unauthorizedInterceptor = _unauthorizedInterceptor_;
     }));
 
-    it("work", function () {
+    it('work', function () {
       unauthorizedInterceptor.responseError({ status: 401, data: 'data' });
       expect(rootScope.loggedIn).toBe(false);
 
@@ -94,6 +97,30 @@ describe("Matsuo Routing -", function () {
 
       unauthorizedInterceptor.responseError({ status: 500, data: 'data' });
       // no possible test actually
+    });
+  });
+
+  describe('apiRedirectsInterceptor', function() {
+
+    var apiRedirectsInterceptor;
+    beforeEach(inject(function (_apiRedirectsInterceptor_) {
+      apiRedirectsInterceptor = _apiRedirectsInterceptor_;
+    }));
+
+    it('apiRedirects works', function () {
+      mtRouteConfig.apiRedirects.classified = 'https://strictly.classified.com';
+      var config = { url: '/classified/api/7' };
+      apiRedirectsInterceptor.request(config);
+      expect(config.url).toBe('https://strictly.classified.com/classified/api/7');
+      delete mtRouteConfig.apiRedirects.classified;
+    });
+
+    it('apiRedirects does not change any request', function () {
+      mtRouteConfig.apiRedirects.classified = 'https://strictly.classified.com';
+      var config = { url: '/classifie/api/7' };
+      apiRedirectsInterceptor.request(config);
+      expect(config.url).toBe('/classifie/api/7');
+      delete mtRouteConfig.apiRedirects.classified;
     });
   });
 });
